@@ -13,10 +13,10 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
         
+
         <!-- title of site -->
         <title>Store it</title>
 
@@ -41,6 +41,7 @@
 		
         <!--bootstrap.min.css-->
         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+
 		
 		<!-- bootsnav -->
 		<link rel="stylesheet" href="{{asset('assets/css/bootsnav.css')}}" >	
@@ -50,6 +51,8 @@
         
         <!--responsive.css-->
         <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
+
+
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -82,7 +85,7 @@
 				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 				                    <i class="fa fa-bars"></i>
 				                </button>
-				                <a class="navbar-brand" href="index.html">carvilla<span></span></a>
+				                <a class="navbar-brand" href="/">carvilla<span></span></a>
 
 				            </div><!--/.navbar-header-->
 				            <!-- End Header Navigation -->
@@ -106,18 +109,11 @@
 
 			</div><!-- /.top-area-->
 			<!-- top-area End -->
-
-			<div class="container">
+            <div class="container">
 				<div class="welcome-hero-txt">
-					<h2>Store it - خزنها</h2>
-					<p>
-						وشوله تحلت اغراضك؟ يمكن تحتاجهم بعدين 
-					</p>
-                    <p>
-						!خزن قَشك الآن معنا
-					</p>
+                    
+                @yield('content')
 
-					<a href="rent-storage"><button class="welcome-btn">احجز مساحة تخزين</button></a>
 				</div>
 			</div>
 
@@ -135,6 +131,8 @@
 		
 		<!--bootstrap.min.js-->
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 		
 		<!-- bootsnav js -->
 		<script src="{{asset('assets/js/bootsnav.js')}}"></script>

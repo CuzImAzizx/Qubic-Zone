@@ -27,6 +27,12 @@ class MainController extends Controller
         ->with('city', $city); 
     }
     public function displayRentingForm($cityId, $branchId){
-        return "$cityId and $branchId";
+        $city = City::where('id', '=', $cityId)->first();
+        $branch = Branch::where('id', '=', $branchId)->first();
+
+        return view('pages.rentingForm')
+        ->with('branch', $branch)
+        ->with('city', $city); 
+
     }
 }

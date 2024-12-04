@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('sizes', function (Blueprint $table) {
             $table->id();
-            $table->string('size_name');
-            $table->string('size_inch');
+            $table->string('name');
+            $table->string('dimensions');
             $table->longText('description');
             $table->string('image');
             $table->double('price_per_month');
-            $table->boolean('isAvailable')->default(true);
-            $table->foreignId('branch_id')->constrained('branches');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('sizes');
     }
 };

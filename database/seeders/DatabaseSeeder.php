@@ -33,19 +33,19 @@ class DatabaseSeeder extends Seeder
         Branch::create([
             'name' => "الفرع شمالي",
             'description' => "شارع انس بن مالك, حي الياسمين, شمال مدينة الرياض",
-            'image' => '/branches-images/1.png',
+            'image' => '/assets/images/warehouses/1.png',
             'city_id' => 1,
         ]);
         Branch::create([
             'name' => "الفرع الجنوبي",
             'description' => "شارع الامام علي ابن ابي طالب, حي الفيصلية, جنوب مدينة الرياض",
-            'image' => '/branches-images/2.png',
+            'image' => '/assets/images/warehouses/2.png',
             'city_id' => 1,
         ]);
         Branch::create([
             'name' => "فرع بريدة",
             'description' => "شارع عمر بن الخطاب, حي الرحاب, شمال مدينة بريدة",
-            'image' => '/branches-images/3.png',
+            'image' => '/assets/images/warehouses/3.png',
             'city_id' => 2,
         ]);
 

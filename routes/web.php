@@ -17,6 +17,9 @@ Route::get('/dashboard', function () {
 Route::get('/rent-storage', [MainController::class, 'displayCities']);
 Route::get('/rent-storage/{cityId}', [MainController::class, 'displayBranches']);
 Route::get('/rent-storage/{cityId}/{branchId}', [MainController::class, 'displayUnits']);
+Route::post('/rent-storage/{cityId}/{branchId}/process', [MainController::class, 'proccessOrder']);
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

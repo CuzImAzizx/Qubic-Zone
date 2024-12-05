@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('unit_orders', function (Blueprint $table) {
             $table->id();
+            //$table->foreignId('user_id')->constrained('users');
             $table->foreignId('branch_id')->constrained('branches');
-            $table->foreignId('size_id')->constrained('sizes');
-            $table->boolean('is_available')->default(true);
+            $table->json('units');
+            $table->double('total_price');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('unit_orders');
     }
 };

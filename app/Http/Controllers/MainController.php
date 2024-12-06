@@ -64,49 +64,52 @@ class MainController extends Controller
             }
         }
 
-        //TODO: Check if there's enough units to order
 
         //Change the availablility of the units for each size
-        $allSmallUnits = Unit::where('size_id', '=', 1)
-        ->where('branch_id', '=', $branchId)->get();
+        $allSmallAvailableUnits = Unit::where('size_id', '=', 1)
+        ->where('branch_id', '=', $branchId)
+        ->where('is_available', '=', true)->get();
 
-        $allMediumUnits = Unit::where('size_id', '=', 2)
-        ->where('branch_id', '=', $branchId)->get();
+        $allMediumAvailableUnits = Unit::where('size_id', '=', 2)
+        ->where('branch_id', '=', $branchId)
+        ->where('is_available', '=', true)->get();
 
-        $allLargeUnits = Unit::where('size_id', '=', 3)
-        ->where('branch_id', '=', $branchId)->get();
+        $allLargeAvailableUnits = Unit::where('size_id', '=', 3)
+        ->where('branch_id', '=', $branchId)
+        ->where('is_available', '=', true)->get();
 
         $unitsIds = [];
-        
-        for($i = 0; $i < $units[1]; $i++){
-            $allSmallUnits[$i]->is_available = false;
-            $allSmallUnits[$i]->update();
-            array_push($unitsIds, $allSmallUnits[$i]->id);
+        for($i = 1; $i <= $units[1]; $i++){
+            $allSmallAvailableUnits[$i]->is_available = false;
+            $allSmallAvailableUnits[$i]->update();
+            array_push($unitsIds, $allSmallAvailableUnits[$i]->id);
         }
-        for($i = 0; $i < $units[2]; $i++){
-            $allMediumUnits[$i]->is_available = false;
-            $allMediumUnits[$i]->update();
-            array_push($unitsIds, $allMediumUnits[$i]->id);
+        for($i = 1; $i <= $units[2]; $i++){
+            $allMediumAvailableUnits[$i]->is_available = false;
+            $allMediumAvailableUnits[$i]->update();
+            array_push($unitsIds, $allMediumAvailableUnits[$i]->id);
 
         }
-        for($i = 0; $i < $units[3]; $i++){
-            $allLargeUnits[$i]->is_available = false;
-            $allLargeUnits[$i]->update();
-            array_push($unitsIds, $allLargeUnits[$i]->id);
+        for($i = 1; $i <= $units[3]; $i++){
+            $allLargeAvailableUnits[$i]->is_available = false;
+            $allLargeAvailableUnits[$i]->update();
+            array_push($unitsIds, $allLargeAvailableUnits[$i]->id);
         }
 
-        $palcedOrder = unit_order::create([
-            //'user_id' => $userId,
+        $placedOrder = unit_order::create([
+            'user_id' => $userId,
             'branch_id' => $branchId,
             'units' => json_encode($unitsIds),
             'total_price' => $totalPrice,
+            'status' => 'pending',
         ]);
-        return $palcedOrder;
+        return view('pages.confirmation')
+        ->with('placedOrder', $placedOrder);
+    }
 
-
-        //
-
-
+    public function viewUserProfile(){
+        //return auth()->user();
+        return view('pages.profile');
     }
 
 }

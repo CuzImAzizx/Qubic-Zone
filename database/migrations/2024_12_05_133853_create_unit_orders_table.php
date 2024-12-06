@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('unit_orders', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('branch_id')->constrained('branches');
             $table->json('units');
             $table->double('total_price');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

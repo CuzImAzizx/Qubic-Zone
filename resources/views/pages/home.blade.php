@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h2>Store it - خزنها</h2>
+<h2>Qubic Zone - كيوبك زون</h2>
 <p>
     وشوله تحلت اغراضك؟ يمكن تحتاجهم بعدين
 </p>

@@ -6,6 +6,36 @@
 </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <style>
+        .storage-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden; /* Prevents image overflow */
+            margin-bottom: 20px; /* Space between cards */
+        }
+
+        .storage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .summary-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .summary-card h5 {
+            margin-bottom: 15px;
+        }
+
+        .summary-card .card-text {
+            margin: 0;
+        }
+
+
         .card-img-top {
             height: 400px;
             /* Set a fixed height */
@@ -55,7 +85,7 @@
     </style>
     @foreach ($sizes as $size)
         <div class="col" style="text-align: center;">
-            <div class="card">
+            <div class="storage-card">
                 <img class="card-img-top" src="{{ $size->image }}" alt="{{ $size->name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $size->name }}</h5>
@@ -205,11 +235,11 @@
         @endforeach
 
         <br>
-        <div class="cart-item" id="Product">
+        <div class="summary-card" id="Product">
             <div class="cart-item-details">
                 <h5>ملخص الطلب</h5>
                 <h6 class="card-text">إجمالي عدد الوحدات: <span id="totalItems">0</span>
-                    <h6 class="card-text">إجمالي السعر: <span id="totalPrice">0.00</span> <!-- Total price display -->
+                    <h6 class="card-text">إجمالي السعر: <span id="totalPrice">0.00</span>ر.س <!-- Total price display -->
             </div>
         </div>
         <br>
@@ -221,7 +251,7 @@
             <input type="hidden" name="branch_id" value="{{ $branch->id }}">
             <input type="hidden" name="user_id" value="{{ auth()->id() }}"> <!-- Auth user ID -->
             <button type="submit" id="reviewOrderButton" class="btn btn-lg btn-primary" type="button" disabled>
-                مراجعة الطلب
+                اتمام الطلب
             </button>
 
         </form>

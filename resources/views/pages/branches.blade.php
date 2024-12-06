@@ -1,5 +1,20 @@
 @extends('layouts.simpleapp')
 @section('content')
+<style>
+            .storage-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden; /* Prevents image overflow */
+            margin-bottom: 20px; /* Space between cards */
+        }
+
+        .storage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+</style>
 <div class="container text-center content">
     <div class="row">
         <h2>فروع {{$city->name}}</h2>
@@ -14,7 +29,7 @@
     </style>
     @foreach ($branches as $branch)
     <div class="col">
-    <div class="card">
+    <div class="card storage-card">
       <img class="card-img-top" src="{{$branch->image}}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{$branch->name}}</h5>

@@ -10,21 +10,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'displayHomePage']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    //return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
-Route::get('/rent-storage', [MainController::class, 'displayCities']);
-Route::get('/rent-storage/{cityId}', [MainController::class, 'displayBranches']);
-Route::get('/rent-storage/{cityId}/{branchId}', [MainController::class, 'displayUnits']);
-Route::post('/rent-storage/{cityId}/{branchId}/process', [MainController::class, 'proccessOrder']);
 
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    //Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    //Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/rent-storage', [MainController::class, 'displayCities']);
+    Route::get('/rent-storage/{cityId}', [MainController::class, 'displayBranches']);
+    Route::get('/rent-storage/{cityId}/{branchId}', [MainController::class, 'displayUnits']);
+    Route::post('/rent-storage/{cityId}/{branchId}/process', [MainController::class, 'proccessOrder']);
+
+    Route::get('/myProfile', [MainController::class, 'viewUserProfile']);
+
 });
 
 require __DIR__.'/auth.php';

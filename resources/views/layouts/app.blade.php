@@ -85,20 +85,21 @@
 				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 				                    <i class="fa fa-bars"></i>
 				                </button>
-				                <a class="navbar-brand" href="/">carvilla<span></span></a>
+				                <a class="navbar-brand" href="/">Qubic Zone<span></span></a>
 
 				            </div><!--/.navbar-header-->
 				            <!-- End Header Navigation -->
 
 				            <!-- Collect the nav links, forms, and other content for toggling -->
-				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-				                    <li class=" scroll active"><a href="#home">home</a></li>
-				                    <li class="scroll"><a href="#service">service</a></li>
-				                    <li class="scroll"><a href="#featured-cars">featured cars</a></li>
-				                    <li class="scroll"><a href="#new-cars">new cars</a></li>
-				                    <li class="scroll"><a href="#brand">brands</a></li>
-				                    <li class="scroll"><a href="#contact">contact</a></li>
+				            <div class="collapse navbar-collapse menu-ui-design">
+				                <ul class="nav navbar-nav navbar-right">
+								<li><a href="#service">الخدمات</a></li>
+				                    <li><a href="#service">الفروع</a></li>
+									@if (!auth()->check())
+									<li><a href="/login">تسجيل الدخول</a></li>
+									@else
+									<li><a href="/myProfile">حسابي</a></li>
+									@endif
 				                </ul><!--/.nav -->
 				            </div><!-- /.navbar-collapse -->
 				        </div><!--/.container-->

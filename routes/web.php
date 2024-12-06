@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/rent-storage/{cityId}/{branchId}/process', [MainController::class, 'proccessOrder']);
 
     Route::get('/myProfile', [MainController::class, 'viewUserProfile']);
+    Route::get('/orderDetails/{orderId}', [MainController::class, 'viewOrderDetails']);
+
 
 });
 

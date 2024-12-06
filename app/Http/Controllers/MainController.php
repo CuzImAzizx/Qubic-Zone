@@ -112,4 +112,10 @@ class MainController extends Controller
         return view('pages.profile');
     }
 
+    public function viewOrderDetails($orderId){
+        //TODO: Check for auth before viewing the details
+        $order = unit_order::findOrFail($orderId);
+        return view('pages.orderDetails')->with('order', $order);
+    }
+
 }

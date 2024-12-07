@@ -8,6 +8,6 @@
     !خزن قَشك الآن معنا
 </p>
 
-<a href="rent-storage"><button class="welcome-btn">احجز مساحة تخزين</button></a>
+<a href="/services"><button class="welcome-btn">عرض الخدمات</button></a>
 
 @endsection

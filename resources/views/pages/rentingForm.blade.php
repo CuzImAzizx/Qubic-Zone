@@ -10,14 +10,17 @@
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #ccc;
             border-radius: 8px;
-            overflow: hidden; /* Prevents image overflow */
-            margin-bottom: 20px; /* Space between cards */
+            overflow: hidden;
+            /* Prevents image overflow */
+            margin-bottom: 20px;
+            /* Space between cards */
         }
 
         .storage-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
+
         .summary-card {
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -221,6 +224,42 @@
                 text-align: center;
             }
         </style>
+        <style>
+            .payment-form-container {
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                background-color: #f9f9f9;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                margin-top: 30px;
+            }
+
+            .form-control {
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin-bottom: 15px;
+                font-size: 16px;
+            }
+
+            .form-control:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px;
+                font-size: 18px;
+            }
+
+            .btn-primary:disabled {
+                background-color: #ccc;
+            }
+        </style>
+
 
         @foreach ($sizes as $size)
             <div class="cart-item" id="{{ $size->id }}Product" style="display:none">
@@ -239,22 +278,71 @@
             <div class="cart-item-details">
                 <h5>ملخص الطلب</h5>
                 <h6 class="card-text">إجمالي عدد الوحدات: <span id="totalItems">0</span>
-                    <h6 class="card-text">إجمالي السعر: <span id="totalPrice">0.00</span>ر.س <!-- Total price display -->
+                    <h6 class="card-text">إجمالي السعر: <span id="totalPrice">0.00</span>ر.س
+                        <!-- Total price display -->
             </div>
+            <br>
+            <button class="btn btn-primary" style="width:90%" id="reviewOrderButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" disabled>الدفع</button>
+
         </div>
         <br>
-        <form method="POST" action="{{ url()->current() . '/' . 'process' }}" id="storageForm">
+        <br>
+
+<div class="offcanvas offcanvas-bottom" style="min-height: 80%;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small">
+  <div class="payment-form-container" style="margin-top: 30px; text-align: center; max-width:50%; margin-left:25%">
+            <h2>تفاصيل الدفع</h2>
+
+            <div class="form-group">
+                <label for="cardNumber">رقم البطاقة:</label>
+                <input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="expiryDate">تاريخ الانتهاء:</label>
+                <input type="text" class="form-control" placeholder="MM/YY" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cvv">CVV:</label>
+                <input type="text" class="form-control" placeholder="XXX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nameOnCard">الاسم على البطاقة:</label>
+                <input type="text" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="billingAddress">عنوان الفاتورة:</label>
+                <input type="text" class="form-control" placeholder="عنوانك هنا" required>
+            </div>
+
+        </div>
+        <br>
+
+
+  <form method="POST" action="{{ url()->current() . '/' . 'process' }}" id="storageForm">
             @csrf
 
             <!-- Hidden inputs for city ID, branch ID, and current user ID -->
             <input type="hidden" name="city_id" value="{{ $city->id }}">
             <input type="hidden" name="branch_id" value="{{ $branch->id }}">
             <input type="hidden" name="user_id" value="{{ auth()->id() }}"> <!-- Auth user ID -->
-            <button type="submit" id="reviewOrderButton" class="btn btn-lg btn-primary" type="button" disabled>
+            <button type="submit" class="btn btn-lg btn-primary" type="button">
                 اتمام الطلب
             </button>
 
         </form>
+
+  </div>
+</div>
+
+
 
         <script>
             document.getElementById('storageForm').addEventListener('submit', function (event) {
@@ -284,4 +372,3 @@
         </script>
     </div>
     @endsection
-

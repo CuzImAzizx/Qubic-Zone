@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 Route::get('/', [MainController::class, 'displayHomePage']);
+Route::get('/services', [MainController::class, 'displayServices']);
 
-Route::get('/dashboard', function () {
-    //return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     //return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
@@ -21,6 +22,8 @@ Route::middleware('auth')->group(function () {
     //Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     //Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    
+
     Route::get('/rent-storage', [MainController::class, 'displayCities']);
     Route::get('/rent-storage/{cityId}', [MainController::class, 'displayBranches']);
     Route::get('/rent-storage/{cityId}/{branchId}', [MainController::class, 'displayUnits']);
@@ -29,6 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/myProfile', [MainController::class, 'viewUserProfile']);
     Route::get('/orderDetails/{orderId}', [MainController::class, 'viewOrderDetails']);
 
+
+
+    Route::get('/dashboard', [MainController::class, 'viewAdminDashboard'])->name('dashboard');
+    Route::get('/reviewOrder/{orderId}', [MainController::class, 'reviewOrder']);
+
+    Route::get('/orderConfirm/{orderId}', [MainController::class, 'orderConfirm']);
+    Route::get('/orderCancel/{orderId}', [MainController::class, 'orderCancel']);
 
 });
 

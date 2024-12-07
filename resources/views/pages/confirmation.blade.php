@@ -107,7 +107,6 @@
 
                     <h5 class="card-title">عدد الوحدات المحجوزة: {{ count($decodedUnits) }}</h5>
                     <p class="card-text">إجمالي المبلغ: <strong>{{ number_format($placedOrder->total_price, 2) }}</strong></p>
-                    <p class="card-text text-warning">الرجاء السداد وتأكيد الطلب في غضون 24 ساعة وإلا سيتم إلغاء الطلب.</p>
                 </div>
                 <div class="card-footer text-muted">
                     شكراً لاختياركم خدماتنا!

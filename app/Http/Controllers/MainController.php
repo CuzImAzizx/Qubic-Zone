@@ -15,6 +15,10 @@ class MainController extends Controller
         return view('pages.home');
     }
 
+    public function displayServices(){
+        return view('pages.services');
+    }
+
     public function displayCities(){
         // Get all the cites coverd
         $cities = City::get();
@@ -101,7 +105,7 @@ class MainController extends Controller
             'branch_id' => $branchId,
             'units' => json_encode($unitsIds),
             'total_price' => $totalPrice,
-            'status' => 'pending',
+            'status' => 'confirmed',
         ]);
         return view('pages.confirmation')
         ->with('placedOrder', $placedOrder);
@@ -117,5 +121,30 @@ class MainController extends Controller
         $order = unit_order::findOrFail($orderId);
         return view('pages.orderDetails')->with('order', $order);
     }
+
+    public function viewAdminDashboard(){
+        //TODO: Check if admin
+        $orders = unit_order::get();
+        return view('pages.dashboard')->with('orders', $orders);
+    }
+
+    public function reviewOrder($orderId){
+        $order = unit_order::findOrFail($orderId);
+        return view('pages.review')->with('order', $order);
+    }
+
+    public function orderConfirm($orderId){
+        $order = unit_order::findOrFail($orderId);
+        $order->status = 'confirmed';
+        $order->update();
+        return redirect("/reviewOrder/$orderId");
+    }
+    public function orderCancel($orderId){
+        $order = unit_order::findOrFail($orderId);
+        $order->status = 'canceled';
+        $order->update();
+        return redirect("/reviewOrder/$orderId");
+    }
+
 
 }

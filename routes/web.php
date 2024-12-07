@@ -29,6 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/rent-storage/{cityId}/{branchId}', [MainController::class, 'displayUnits']);
     Route::post('/rent-storage/{cityId}/{branchId}/process', [MainController::class, 'proccessOrder']);
 
+    Route::get('/rent-cold-storage', [MainController::class, 'displayCities']);
+    Route::get('/rent-cold-storage/{cityId}', [MainController::class, 'displayBranches']);
+    Route::get('/rent-cold-storage/{cityId}/{branchId}', [MainController::class, 'displayRefrigeratedUnits']);
+    Route::post('/rent-cold-storage/{cityId}/{branchId}/process', [MainController::class, 'proccessRefrigeratedOrder']);
+
+
     Route::get('/myProfile', [MainController::class, 'viewUserProfile']);
     Route::get('/orderDetails/{orderId}', [MainController::class, 'viewOrderDetails']);
 

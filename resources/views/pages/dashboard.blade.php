@@ -64,16 +64,6 @@ $pendingOrders = unit_order::where('status', '=', 'pending')->get();
 
     @endphp
     @if (count($orders) > 0)
-    @php
-            $branchId = $orders[0]->branch_id;
-            $branch = Branch::find($branchId);
-            $branchName = $branch->name;
-            $city = City::find($branch->city_id);
-            $cityName = $city->name;
-            $userId = $orders[0]->user_id;
-            $user = User::find($userId);
-            $userName = $user->name
-        @endphp
 
 
         <h2 class="mt-4">جميع الطلبات السابقة</h2>
@@ -92,6 +82,18 @@ $pendingOrders = unit_order::where('status', '=', 'pending')->get();
                 </thead>
                 <tbody>
                     @foreach ($orders as $order)
+                    @php
+                    // How to get the current index?
+            $branchId = $order->branch_id;
+            $branch = Branch::find($branchId);
+            $branchName = $branch->name;
+            $city = City::find($branch->city_id);
+            $cityName = $city->name;
+            $userId = $order->user_id;
+            $user = User::find($userId);
+            $userName = $user->name
+        @endphp
+
                         <tr>
                             <td><a href="/reviewOrder/{{$order->id}}" class="btn btn-info">عرض التفاصيل</a></td>
                             <td>{{ $order->created_at->format('d-m-Y H:i') }}</td>

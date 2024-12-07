@@ -17,13 +17,6 @@
     @endphp
 
     @if(count($pendingOrders) > 0)
-        @php
-            $branchId = $pendingOrders[0]->branch_id;
-            $branch = Branch::find($branchId);
-            $branchName = $branch->name;
-            $city = City::find($branch->city_id);
-            $cityName = $city->name;
-        @endphp
 
         <div class="alert alert-warning" role="alert">
             <strong>تحذير:</strong> لديك طلبات غير مكتملة
@@ -45,6 +38,14 @@
                 </thead>
                 <tbody>
                     @foreach ($pendingOrders as $order)
+                    @php
+            $branchId = $order->branch_id;
+            $branch = Branch::find($branchId);
+            $branchName = $branch->name;
+            $city = City::find($branch->city_id);
+            $cityName = $city->name;
+        @endphp
+
                         <tr>
                             <td><a href="/orderDetails/{{$order->id}}" class="btn btn-info">عرض التفاصيل</a></td>
                             <td><strong><span class="text-warning">غير مكتمل</span></strong></td>

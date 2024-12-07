@@ -85,30 +85,51 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        // Create 20 small units for branch_id 1
+        // Create the units on all the branches
+        $branches = Branch::all();
+        foreach ($branches as $branch) {
+            
+        // Create 20 small normal units for $branch->id,
         for ($i=0; $i < 20; $i++) { 
             Unit::create([
-                'branch_id' => 1,
+                'branch_id' => $branch->id,
                 'size_id' => 1,
+                'type' => 'normal',
                 'is_available' => true,
             ]);
         }
-        // Create 10 medium units for branch_id 1
+        // Create 10 medium normal units for branch_id 1
         for ($i=0; $i < 10; $i++) { 
             Unit::create([
-                'branch_id' => 1,
+                'branch_id' => $branch->id,
                 'size_id' => 2,
+                'type' => 'normal',
                 'is_available' => true,
             ]);
         }
-        // Create 5 large units for branch_id 1
+        // Create 5 large normal units for branch_id 1
         for ($i=0; $i < 5; $i++) { 
             Unit::create([
-                'branch_id' => 1,
+                'branch_id' => $branch->id,
                 'size_id' => 3,
+                'type' => 'normal',
                 'is_available' => true,
             ]);
         }
+        // Create 5 small refrigerated units for branch_id 1
+        for ($i=0; $i < 5; $i++) { 
+            Unit::create([
+                'branch_id' => $branch->id,
+                'size_id' => 1,
+                'type' => 'refrigerated',
+                'is_available' => true,
+            ]);
+        }
+
+        }
+
+
+        
 
 
 

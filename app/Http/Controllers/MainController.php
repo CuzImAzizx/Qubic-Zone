@@ -39,6 +39,7 @@ class MainController extends Controller
         
         $availableUnits = Unit::where('branch_id', '=', $branchId)
         ->where('is_available', '=', true)
+        ->where('type', '=', 'normal')
         ->get();
         $sizes = Size::get();
 
@@ -49,6 +50,25 @@ class MainController extends Controller
         ->with('sizes', $sizes);
 
     }
+
+    public function displayRefrigeratedUnits($cityId, $branchId){
+        $city = City::where('id', '=', $cityId)->first();
+        $branch = Branch::where('id', '=', $branchId)->first();
+        
+        $availableUnits = Unit::where('branch_id', '=', $branchId)
+        ->where('is_available', '=', true)
+        ->where('type', '=', 'refrigerated')
+        ->get();
+        $sizes = Size::get();
+
+        return view('pages.refrigeratedRentingForm')
+        ->with('branch', $branch)
+        ->with('city', $city)
+        ->with('availableUnits', $availableUnits)
+        ->with('sizes', $sizes);
+
+    }
+
 
     public function proccessOrder(Request $request){
         $cityId = $request->city_id;
@@ -72,14 +92,17 @@ class MainController extends Controller
         //Change the availablility of the units for each size
         $allSmallAvailableUnits = Unit::where('size_id', '=', 1)
         ->where('branch_id', '=', $branchId)
+        ->where('type', '=', 'normal')
         ->where('is_available', '=', true)->get();
 
         $allMediumAvailableUnits = Unit::where('size_id', '=', 2)
         ->where('branch_id', '=', $branchId)
+        ->where('type', '=', 'normal')
         ->where('is_available', '=', true)->get();
 
         $allLargeAvailableUnits = Unit::where('size_id', '=', 3)
         ->where('branch_id', '=', $branchId)
+        ->where('type', '=', 'normal')
         ->where('is_available', '=', true)->get();
 
         $unitsIds = [];
@@ -110,6 +133,41 @@ class MainController extends Controller
         return view('pages.confirmation')
         ->with('placedOrder', $placedOrder);
     }
+    public function proccessRefrigeratedOrder(Request $request){
+        $cityId = $request->city_id;
+        $branchId = $request->branch_id;
+        $units = $request->sizes;
+        $userId = $request->user_id;
+
+
+        //Calculate the total price
+        $unitPrice = 300;
+        $totalPrice = $unitPrice * $units[1];
+
+
+        //Change the availablility of the units for each size
+        $allAvailableUnits = Unit::where('branch_id', '=', $branchId)
+        ->where('type', '=', 'refrigerated')
+        ->where('is_available', '=', true)->get();
+
+        $unitsIds = [];
+        for($i = 1; $i <= $units[1]; $i++){
+            $allAvailableUnits[$i]->is_available = false;
+            $allAvailableUnits[$i]->update();
+            array_push($unitsIds, $allAvailableUnits[$i]->id);
+        }
+
+        $placedOrder = unit_order::create([
+            'user_id' => $userId,
+            'branch_id' => $branchId,
+            'units' => json_encode($unitsIds),
+            'total_price' => $totalPrice,
+            'status' => 'confirmed',
+        ]);
+        return view('pages.confirmation')
+        ->with('placedOrder', $placedOrder);
+    }
+
 
     public function viewUserProfile(){
         //return auth()->user();

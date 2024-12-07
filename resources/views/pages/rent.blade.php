@@ -21,6 +21,7 @@
                                     if (selectedValue) {
                                         // Redirect to a new URL with the selected city as a query parameter
                                         window.location.href = `/rent-storage/${selectedValue}`;
+                                        window.location.href = `{{ url()->current() . '/'}}${selectedValue}`;
                                     }
                                 });
                             </script>

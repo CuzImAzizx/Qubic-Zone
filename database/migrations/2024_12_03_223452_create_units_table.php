@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('branch_id')->constrained('branches');
             $table->foreignId('size_id')->constrained('sizes');
             $table->boolean('is_available')->default(true);
+            $table->string('type');
             $table->timestamps();
         });
     }

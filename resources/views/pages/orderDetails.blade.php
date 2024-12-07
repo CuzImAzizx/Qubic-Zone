@@ -60,6 +60,8 @@
 @php
     use App\Models\Size;
     use App\Models\Unit;
+    use App\Models\Branch;
+    use App\Models\City;
     $sizes = Size::get();
     $decodedUnits = json_decode($order->units);
 @endphp
@@ -79,16 +81,36 @@
                                     $fullUnitDetails = Unit::find($unitId);
                                     $unitSize = Size::find($fullUnitDetails->size_id);
                                 @endphp
-                                <div class="col-md-4">
-                                    <div class="cart-item">
-                                        <img src="{{ $unitSize->image }}" alt="Product Image">
-                                        <div class="cart-item-details">
-                                            <h6>وحدة تخزين {{ $unitSize->name }}</h6>
-                                            <p>رقم الوحدة: <strong>{{ $unitId }}</strong></p>
+                                @if ($fullUnitDetails->type == 'refrigerated')
+                                    <div class="col-md-4">
+                                        <div class="cart-item">
+                                            <img src="{{asset('/assets/images/warehouses/4.png')}}" alt="Product Image">
+                                            <div class="cart-item-details">
+                                                <h6>وحدة تخزين مبرّدة</h6>
+                                                <p>رقم الوحدة: <strong>{{ $unitId }}</strong></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="col-md-4">
+                                        <div class="cart-item">
+                                            <img src="{{ $unitSize->image }}" alt="Product Image">
+                                            <div class="cart-item-details">
+                                                <h6>وحدة تخزين {{ $unitSize->name }}</h6>
+                                                <p>رقم الوحدة: <strong>{{ $unitId }}</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @endforeach
+                            @php
+                                $branchId = $order->branch_id;
+                                $branch = Branch::find($branchId);
+                                $branchName = $branch->name;
+                                $city = City::find($branch->city_id);
+                                $cityName = $city->name;
+
+                            @endphp
                         </div>
 
                         <h5 class="card-title">عدد الوحدات المحجوزة: {{ count($decodedUnits) }}</h5>
@@ -109,6 +131,8 @@
 
                         @endif
 
+                        <p class="card-text">موقع المخزن: <strong>{{ $branchName }}, {{ $cityName }}</strong></p>
+                        p
                     </div>
                     <div class="card-footer text-muted">!شكراً لاختياركم خدماتنا</div>
                 </div>

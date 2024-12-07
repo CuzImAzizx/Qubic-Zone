@@ -92,7 +92,18 @@
                 $fullUnitDetails = Unit::find($unitId);
                 $unitSize = Size::find($fullUnitDetails->size_id);
             @endphp
+            @if ($fullUnitDetails->type == 'refrigerated')
+            <div class="col-md-4">
+                <div class="cart-item">
+                    <img src="{{asset('/assets/images/warehouses/4.png')}}" alt="Product Image">
+                    <div class="cart-item-details">
+                        <h6>وحدة تخزين مبرّدة</h6>
+                        <p>رقم الوحدة: <strong>{{ $unitId }}</strong></p>
+                    </div>
+                </div>
+            </div>
 
+            @else
             <div class="col-md-4">
                 <div class="cart-item">
                     <img src="{{ $unitSize->image }}" alt="Product Image">
@@ -102,6 +113,9 @@
                     </div>
                 </div>
             </div>
+
+            @endif
+
         @endforeach
     </div>
 

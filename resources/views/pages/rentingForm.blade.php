@@ -120,23 +120,32 @@
                         function updateReviewButtonState() {
                             const counters = document.querySelectorAll('.counter');
                             const reviewButton = document.getElementById('reviewOrderButton');
+                            const rentalMonthsSelect = document.getElementById('rentalMonthsSelect');
+                            const rentalMonthsLable = document.getElementById('rentalMonthsLable');
                             let totalQuantity = 0;
-                            let totalPrice = 0;
 
                             counters.forEach(counter => {
                                 const quantity = parseInt(counter.value) || 0; // Ensure quantity is a number
-                                const pricePerMonth = parseFloat(counter.dataset.price) || 0; // Ensure price is a number
                                 totalQuantity += quantity;
-                                totalPrice += quantity * pricePerMonth;
                             });
 
                             // Enable or disable the review button based on the total
                             reviewButton.disabled = totalQuantity === 0;
 
+                            // Show rental months select if any quantity is added
+                            rentalMonthsSelect.style.display = totalQuantity > 0 ? 'block' : 'none';
+                            rentalMonthsLable.style.display = totalQuantity > 0 ? 'block' : 'none';
+
                             // Update the total in the offcanvas
                             document.getElementById('totalItems').innerText = totalQuantity;
-                            document.getElementById('totalPrice').innerText = totalPrice.toFixed(2); // Format to 2 decimal places
+                            const totalPrice = Array.from(counters).reduce((acc, counter) => {
+                                const pricePerMonth = parseFloat(counter.dataset.price) || 0;
+                                return acc + (parseInt(counter.value) || 0) * pricePerMonth;
+                            }, 0);
+                            const rentalMonths = document.getElementById('rentalMonthsSelect').value
+                            document.getElementById('totalPrice').innerText = totalPrice.toFixed(2) * rentalMonths; // Format to 2 decimal places
                         }
+
 
                         // Increment button event listener
                         document.getElementById('{{ $size->id }}IncrementBtn').addEventListener('click', function () {
@@ -260,14 +269,23 @@
             }
         </style>
 
-
+        <div class="container" style="text-align: center;">
+            <h5 id="rentalMonthsLable" style="display: none;">:أجّرها لمدة</h5>
+            <select id="rentalMonthsSelect" class="form-select" style="display: none;">
+                <option value="1" selected>شهر واحد</option>
+                <option value="3">ثلاثة أشهر</option>
+                <option value="6">ستة أشهر</option>
+                <option value="12">سنة واحدة</option>
+                <option value="24">سنتين</option>
+            </select>
+        </div>
         @foreach ($sizes as $size)
             <div class="cart-item" id="{{ $size->id }}Product" style="display:none">
                 <img src="{{ $size->image }}" alt="Product Image">
                 <div class="cart-item-details">
                     <h6>وحدة تخزين {{ $size->name }}</h6>
                     <p class="card-text">عدد الوحدات: <span id='{{ $size->id }}CounterFinal'>0</span></p>
-                    <p class="card-text">إجمالي السعر: <span id='{{ $size->id }}TotalPrice'>0.00</span></p>
+                    <p class="card-text">سعر التأجير الشهري: <span id='{{ $size->id }}TotalPrice'>0.00</span>ر.س</p>
                     <!-- Total price display -->
                 </div>
             </div>
@@ -277,70 +295,74 @@
         <div class="summary-card" id="Product">
             <div class="cart-item-details">
                 <h5>ملخص الطلب</h5>
-                <h6 class="card-text">إجمالي عدد الوحدات: <span id="totalItems">0</span>
-                    <h6 class="card-text">إجمالي السعر: <span id="totalPrice">0.00</span>ر.س
-                        <!-- Total price display -->
+                <h6 class="card-text">إجمالي عدد الوحدات: <span id="totalItems">0</span></h6>
+                <h6 class="card-text">مدة التأجير: <span id="rentalMonth">1</span> أشهر</h6>
+                <h6 class="card-text">إجمالي السعر: <span id="totalPrice">0.00</span>ر.س</h6>
             </div>
             <br>
-            <button class="btn btn-primary" style="width:90%" id="reviewOrderButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" disabled>الدفع</button>
+            <button class="btn btn-primary" style="width:90%" id="reviewOrderButton" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
+                disabled>الدفع</button>
 
         </div>
         <br>
         <br>
 
-<div class="offcanvas offcanvas-bottom" style="min-height: 80%;" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body small">
-  <div class="payment-form-container" style="margin-top: 30px; text-align: center; max-width:50%; margin-left:25%">
-            <h2>تفاصيل الدفع</h2>
-
-            <div class="form-group">
-                <label for="cardNumber">رقم البطاقة:</label>
-                <input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" required>
+        <div class="offcanvas offcanvas-bottom" style="min-height: 80%;" tabindex="-1" id="offcanvasBottom"
+            aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+            <div class="offcanvas-body small">
+                <div class="payment-form-container"
+                    style="margin-top: 30px; text-align: center; max-width:50%; margin-left:25%">
+                    <h2>تفاصيل الدفع</h2>
 
-            <div class="form-group">
-                <label for="expiryDate">تاريخ الانتهاء:</label>
-                <input type="text" class="form-control" placeholder="MM/YY" required>
+                    <div class="form-group">
+                        <label for="cardNumber">رقم البطاقة:</label>
+                        <input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expiryDate">تاريخ الانتهاء:</label>
+                        <input type="text" class="form-control" placeholder="MM/YY" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" class="form-control" placeholder="XXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nameOnCard">الاسم على البطاقة:</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="billingAddress">عنوان الفاتورة:</label>
+                        <input type="text" class="form-control" placeholder="عنوانك هنا" required>
+                    </div>
+
+                </div>
+                <br>
+
+
+                <form method="POST" action="{{ url()->current() . '/' . 'process' }}" id="storageForm">
+                    @csrf
+
+                    <!-- Hidden inputs for city ID, branch ID, and current user ID -->
+                    <input type="hidden" name="city_id" value="{{ $city->id }}">
+                    <input type="hidden" name="branch_id" value="{{ $branch->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}"> <!-- Auth user ID -->
+                    <button type="submit" class="btn btn-lg btn-primary" type="button">
+                        اتمام الطلب
+                    </button>
+
+                </form>
+
             </div>
-
-            <div class="form-group">
-                <label for="cvv">CVV:</label>
-                <input type="text" class="form-control" placeholder="XXX" required>
-            </div>
-
-            <div class="form-group">
-                <label for="nameOnCard">الاسم على البطاقة:</label>
-                <input type="text" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label for="billingAddress">عنوان الفاتورة:</label>
-                <input type="text" class="form-control" placeholder="عنوانك هنا" required>
-            </div>
-
         </div>
-        <br>
-
-
-  <form method="POST" action="{{ url()->current() . '/' . 'process' }}" id="storageForm">
-            @csrf
-
-            <!-- Hidden inputs for city ID, branch ID, and current user ID -->
-            <input type="hidden" name="city_id" value="{{ $city->id }}">
-            <input type="hidden" name="branch_id" value="{{ $branch->id }}">
-            <input type="hidden" name="user_id" value="{{ auth()->id() }}"> <!-- Auth user ID -->
-            <button type="submit" class="btn btn-lg btn-primary" type="button">
-                اتمام الطلب
-            </button>
-
-        </form>
-
-  </div>
-</div>
 
 
 
@@ -365,10 +387,55 @@
                     this.appendChild(hiddenInput);
                 });
 
+                // Get the selected rental months
+                const rentalMonthsSelect = document.getElementById('rentalMonthsSelect');
+                const selectedMonths = rentalMonthsSelect.value;
+
+                // Create a hidden input for the rental months
+                const monthsInput = document.createElement('input');
+                monthsInput.type = 'hidden';
+                monthsInput.name = 'rentalMonths';
+                monthsInput.value = selectedMonths;
+
+                // Append the hidden input to the form
+                this.appendChild(monthsInput);
+
                 // Now submit the form
                 this.submit();
             });
+        </script>
+        <script>
+            // Function to update total items and price
+            function updateSummary() {
+                const counters = document.querySelectorAll('.counter');
+                const rentalMonthsSelect = document.getElementById('rentalMonthsSelect');
+                const rentalMonths = parseInt(rentalMonthsSelect.value);
+                let totalPrice = 0;
+                let totalQuantity = 0;
 
+                counters.forEach(counter => {
+                    const quantity = parseInt(counter.value) || 0;
+                    const pricePerMonth = parseFloat(counter.dataset.price) || 0;
+                    totalQuantity += quantity;
+                    totalPrice += quantity * pricePerMonth;
+                });
+
+                // Update total price with rental months
+                totalPrice *= rentalMonths;
+
+                document.getElementById('totalItems').innerText = totalQuantity;
+                document.getElementById('totalPrice').innerText = totalPrice.toFixed(2); // Format to 2 decimal places
+                document.getElementById('rentalMonth').innerText = rentalMonths; // Update rental month display
+            }
+        </script>
+        <script>
+            // Update summary when rental months change
+            document.getElementById('rentalMonthsSelect').addEventListener('change', function () {
+                updateSummary();
+            });
+
+            // Initial call to set the summary correctly on page load
+            updateSummary();
         </script>
     </div>
     @endsection

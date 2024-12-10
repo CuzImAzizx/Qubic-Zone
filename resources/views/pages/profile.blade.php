@@ -94,7 +94,7 @@
                             <td><a href="/orderDetails/{{$order->id}}" class="btn btn-info">عرض التفاصيل</a></td>
                             <td>
                                 @if($order->status == 'confirmed')
-                                    <strong><span class="text-success">مكتمل</span></strong>
+                                    <strong><span class="text-success">فعّال</span></strong>
                                 @elseif($order->status == 'canceled')
                                     <strong><span class="text-danger">ملغي</span></strong>
                                 @else

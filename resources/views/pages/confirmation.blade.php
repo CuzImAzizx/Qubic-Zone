@@ -11,7 +11,8 @@
         $fullCityDetails = City::find($fullBranchDetails->city_id);
     @endphp
 
-    <p class="lead">الرجاء زيارة "<strong>{{$fullBranchDetails->name}}</strong>" في "<strong>{{$fullCityDetails->name}}</strong>" للدفع واخذ مفاتيح الوحدات</p>
+    <p class="lead">محتويًا على تفاصيل الوحدات وارقام المرور "<strong>{{auth()->user()->email}}</strong>" تم ارسال بريد الكتروني الى </p>
+
 </div>
 
 <style>

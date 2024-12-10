@@ -12,8 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
 
-    <title>Centered Grid</title>
+    <title>Qubic Zone</title>
     <style>
+        body{
+            background-color: #f9f9f9;
+        }
+        .card {
+            background-color: #fafafa;
+        }
     </style>
 </head>
 

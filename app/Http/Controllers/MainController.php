@@ -75,6 +75,7 @@ class MainController extends Controller
         $branchId = $request->branch_id;
         $units = $request->sizes;
         $userId = $request->user_id;
+        $rentalDuration = intval($request->rentalMonths);
 
 
         //Calculate the total price
@@ -87,6 +88,7 @@ class MainController extends Controller
                 }
             }
         }
+        $totalPrice *= $rentalDuration;
 
 
         //Change the availablility of the units for each size
@@ -127,6 +129,9 @@ class MainController extends Controller
             'user_id' => $userId,
             'branch_id' => $branchId,
             'units' => json_encode($unitsIds),
+            'rental_duration' => $rentalDuration,
+            'start_date' => now(),
+            'end_date' => now()->addMonths($rentalDuration),
             'total_price' => $totalPrice,
             'status' => 'confirmed',
         ]);
@@ -138,14 +143,16 @@ class MainController extends Controller
         $branchId = $request->branch_id;
         $units = $request->sizes;
         $userId = $request->user_id;
+        $rentalDuration = intval($request->rentalMonths);
 
 
         //Calculate the total price
         $unitPrice = 300;
         $totalPrice = $unitPrice * $units[1];
+        $totalPrice *= $rentalDuration;
 
 
-        //Change the availablility of the units for each size
+        //Change the availablility of the units
         $allAvailableUnits = Unit::where('branch_id', '=', $branchId)
         ->where('type', '=', 'refrigerated')
         ->where('is_available', '=', true)->get();
@@ -161,6 +168,9 @@ class MainController extends Controller
             'user_id' => $userId,
             'branch_id' => $branchId,
             'units' => json_encode($unitsIds),
+            'rental_duration' => $rentalDuration,
+            'start_date' => now(),
+            'end_date' => now()->addMonths($rentalDuration),
             'total_price' => $totalPrice,
             'status' => 'confirmed',
         ]);

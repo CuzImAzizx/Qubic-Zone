@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('branch_id')->constrained('branches');
             $table->json('units');
+            $table->bigInteger('rental_duration');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->double('total_price');
             $table->string('status')->default('pending');
             $table->timestamps();

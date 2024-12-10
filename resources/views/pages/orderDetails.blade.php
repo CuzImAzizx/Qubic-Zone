@@ -114,25 +114,23 @@
                         </div>
 
                         <h5 class="card-title">عدد الوحدات المحجوزة: {{ count($decodedUnits) }}</h5>
-                        <p class="card-text">إجمالي المبلغ: <strong>{{ number_format($order->total_price, 2) }}</strong>
-
-                        </p>
+                        <p class="card-text">موقع المخزن: <strong>{{ $branchName }}, {{ $cityName }}</strong></p>
+                        <p class="card-text">مدة الإيجار: <strong>{{ $order->rental_duration }} شهر</strong></p>
+                        <p class="card-text">تاريخ بدء الإيجار: <strong>{{ \Carbon\Carbon::parse($order->start_date)->format('d-m-Y') }}</strong></p>
+                        <p class="card-text">تاريخ انتهاء الإيجار: <strong>{{ \Carbon\Carbon::parse($order->end_date)->format('d-m-Y') }}</strong></p>
+                        <p class="card-text">إجمالي المبلغ: <strong>{{ number_format($order->total_price, 2) }}</strong></p>
 
                         @if($order->status == 'confirmed')
-                            <p>حالة الطلب: <strong><span class="text-success">مكتمل</span></strong></p>
+                            <p>حالة الطلب: <strong><span class="text-success">فعّال</span></strong></p>
                         @elseif($order->status == 'canceled')
                             <p>حالة الطلب: <strong><span class="text-danger">ملغي</span></strong></p>
                         @elseif($order->status == 'pending')
                             <p>حالة الطلب: <strong><span class="text-warning">غير مكتمل</span></strong></p>
-                            <p class="card-text text-warning">الرجاء السداد وتأكيد الطلب في غضون 24 ساعة وإلا سيتم إلغاء
-                                الطلب.</p>
+                            <p class="card-text text-warning">الرجاء السداد وتأكيد الطلب في غضون 24 ساعة وإلا سيتم إلغاء الطلب.</p>
                         @else
                             <p>حالة الطلب: <span class="text-secondary">{{ $order->status }}</span></p>
-
                         @endif
 
-                        <p class="card-text">موقع المخزن: <strong>{{ $branchName }}, {{ $cityName }}</strong></p>
-                        p
                     </div>
                     <div class="card-footer text-muted">!شكراً لاختياركم خدماتنا</div>
                 </div>

@@ -54,9 +54,9 @@
 </style>
 
 <div class="container text-center">
-    <div class="row header-text">
-        <h2>الخدمات</h2>
-        <p>Qubic Zone اختر احد الخدمات المقدمة من</p>
+    <div class="row header-text card-header">
+        <h2>خدمات الأفراد</h2>
+        <p>للأفراد Qubic Zone اختر احد الخدمات المقدمة من</p>
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -82,7 +82,15 @@
                 </div>
             </div>
         </div>
+        </div>
+        <hr>
+        <br>
+        <div class="row header-text card-header">
+        <h2>خدمات الشركات</h2>
+        <p>للشركات Qubic Zone اختر احد الخدمات المقدمة من</p>
+    </div>
 
+        <div class="row row-cols-1 row-cols-md-2 g-4">
 
         <div class="col">
             <div class="card storage-card">

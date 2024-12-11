@@ -109,20 +109,20 @@ class MainController extends Controller
 
         $unitsIds = [];
         for($i = 1; $i <= $units[1]; $i++){
-            $allSmallAvailableUnits[$i]->is_available = false;
-            $allSmallAvailableUnits[$i]->update();
-            array_push($unitsIds, $allSmallAvailableUnits[$i]->id);
+            $allSmallAvailableUnits[$i - 1]->is_available = false;
+            $allSmallAvailableUnits[$i - 1]->update();
+            array_push($unitsIds, $allSmallAvailableUnits[$i - 1]->id);
         }
         for($i = 1; $i <= $units[2]; $i++){
-            $allMediumAvailableUnits[$i]->is_available = false;
-            $allMediumAvailableUnits[$i]->update();
-            array_push($unitsIds, $allMediumAvailableUnits[$i]->id);
+            $allMediumAvailableUnits[$i - 1]->is_available = false;
+            $allMediumAvailableUnits[$i - 1]->update();
+            array_push($unitsIds, $allMediumAvailableUnits[$i - 1]->id);
 
         }
         for($i = 1; $i <= $units[3]; $i++){
-            $allLargeAvailableUnits[$i]->is_available = false;
-            $allLargeAvailableUnits[$i]->update();
-            array_push($unitsIds, $allLargeAvailableUnits[$i]->id);
+            $allLargeAvailableUnits[$i - 1]->is_available = false;
+            $allLargeAvailableUnits[$i - 1]->update();
+            array_push($unitsIds, $allLargeAvailableUnits[$i - 1]->id);
         }
 
         $placedOrder = unit_order::create([
@@ -159,9 +159,9 @@ class MainController extends Controller
 
         $unitsIds = [];
         for($i = 1; $i <= $units[1]; $i++){
-            $allAvailableUnits[$i]->is_available = false;
-            $allAvailableUnits[$i]->update();
-            array_push($unitsIds, $allAvailableUnits[$i]->id);
+            $allAvailableUnits[$i - 1]->is_available = false;
+            $allAvailableUnits[$i - 1]->update();
+            array_push($unitsIds, $allAvailableUnits[$i - 1]->id);
         }
 
         $placedOrder = unit_order::create([

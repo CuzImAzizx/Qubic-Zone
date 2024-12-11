@@ -115,8 +115,8 @@
 
                         <h5 class="card-title">عدد الوحدات المحجوزة: {{ count($decodedUnits) }}</h5>
                         <p class="card-text">موقع المخزن: <strong>{{ $branchName }}, {{ $cityName }}</strong></p>
-                        <p class="card-text">مدة الإيجار: <strong>{{ $order->rental_duration }} شهر</strong></p>
                         <p class="card-text">تاريخ بدء الإيجار: <strong>{{ \Carbon\Carbon::parse($order->start_date)->format('d-m-Y') }}</strong></p>
+                        <p class="card-text">مدة الإيجار: <strong>{{ $order->rental_duration }} شهر</strong></p>
                         <p class="card-text">تاريخ انتهاء الإيجار: <strong>{{ \Carbon\Carbon::parse($order->end_date)->format('d-m-Y') }}</strong></p>
                         <p class="card-text">إجمالي المبلغ: <strong>{{ number_format($order->total_price, 2) }}</strong></p>
 

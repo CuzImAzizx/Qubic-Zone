@@ -2,9 +2,19 @@
 
 @section('content')
 <div class="container mt-4" style="text-align: right;">
+    <div class="header-text card-header">
     <h1 class="text-center">حسابي</h1>
+    </div>
+    <br>
     <div class="text-center mb-4">
         <h3>{{ auth()->user()->name }} مرحبًا</h3>
+        @php
+        use App\Models\Subscription;
+        use App\Models\Plan;
+        $sub = Subscription::where('user_id', auth()->id())->first();
+        $plan = Plan::find($sub->plan_id);
+        @endphp
+        <h5>نوع الاشتراك: {{$plan->name}}</h5>
     </div>
 
     @php

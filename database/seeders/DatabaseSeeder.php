@@ -6,7 +6,9 @@ use App\Models\Unit;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Branch;
+use App\Models\Plan;
 use App\Models\Size;
+use App\Models\Subscription;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -25,10 +27,32 @@ class DatabaseSeeder extends Seeder
         //    'email' => 'test@example.com',
         //]);
 
-        User::create([
+        //Create plans
+        $basicPlan = Plan::create([
+            'name' => 'الخطة الأساسية',
+            'description' => 'الوصول الى خصائص اساسية',
+            'image' => 'assets/images/plans/planBasic.png',
+            'price_per_month' => 0,
+        ]);
+        $premiumPlan = Plan::create([
+            'name' => 'الخطة الذهبية',
+            'description' => 'الوصول الى خصائص اكثر',
+            'image' => 'assets/images/plans/planPremium.png',
+            'price_per_month' => 200,
+        ]);
+
+
+        $defaultUser = User::create([
             'name' => "user",
             'email' => 'user@email.com',
-            'password' => Hash::make('123456789'), 
+            'password' => Hash::make('123456789'),
+        ]);
+
+        Subscription::create([
+            'user_id' => $defaultUser->id,
+            'plan_id' => $basicPlan->id,
+            'start_date' => now(),
+            'end_date' => null,
         ]);
 
         //Create cities

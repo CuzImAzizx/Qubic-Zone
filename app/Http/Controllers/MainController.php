@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Branch;
 use App\Models\City;
+use App\Models\Plan;
 use App\Models\Size;
 use App\Models\Unit;
 use App\Models\unit_order;
@@ -33,6 +34,12 @@ class MainController extends Controller
         ->with('branches', $branches)
         ->with('city', $city); 
     }
+
+    public function viewAllBranches(){
+        $cities = City::all();
+        return view('pages.allBranches')->with('cities', $cities);
+    }
+
     public function displayUnits($cityId, $branchId){
         $city = City::where('id', '=', $cityId)->first();
         $branch = Branch::where('id', '=', $branchId)->first();
@@ -131,7 +138,7 @@ class MainController extends Controller
             'units' => json_encode($unitsIds),
             'rental_duration' => $rentalDuration,
             'start_date' => now(),
-            'end_date' => now()->addMonths($rentalDuration),
+            'end_date' => now()->copy()->addMonths($rentalDuration),
             'total_price' => $totalPrice,
             'status' => 'confirmed',
         ]);
@@ -170,7 +177,7 @@ class MainController extends Controller
             'units' => json_encode($unitsIds),
             'rental_duration' => $rentalDuration,
             'start_date' => now(),
-            'end_date' => now()->addMonths($rentalDuration),
+            'end_date' => now()->copy()->addMonths($rentalDuration),
             'total_price' => $totalPrice,
             'status' => 'confirmed',
         ]);
@@ -212,6 +219,16 @@ class MainController extends Controller
         $order->status = 'canceled';
         $order->update();
         return redirect("/reviewOrder/$orderId");
+    }
+
+    public function viewPlans(){
+        $plans = Plan::all();
+        return view('pages.plans')->with('plans', $plans);
+    }
+    public function PurchasePlan($planId){
+        //TODO: Check if user has this plan
+        $plan = Plan::findOrFail($planId);
+        return view('pages.buyPlan')->with('plan', $plan);
     }
 
 

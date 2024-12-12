@@ -95,6 +95,8 @@
 				                <ul class="nav navbar-nav navbar-right">
 								<li><a href="/services">الخدمات</a></li>
 				                    <li><a href="/branches">الفروع</a></li>
+									<li><a href="/plans">الاشتراكات</a></li>
+
 									@if (!auth()->check())
 									<li><a href="/login">تسجيل الدخول</a></li>
 									@else
@@ -145,6 +147,33 @@
 
         <!--Custom JS-->
         <script src="{{asset('assets/js/custom.js')}}"></script>
+		<style>
+
+        footer {
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+		<footer>
+        <div class="container">
+            <p>&copy; {{ date('Y') }} Qubic Zone. جميع الحقوق محفوظة.</p>
+            <p>
+                <a href="/privacy-policy">سياسة الخصوصية</a> | 
+                <a href="/terms-of-service">شروط الخدمة</a>
+            </p>
+        </div>
+    </footer>
 
     </body>
 	

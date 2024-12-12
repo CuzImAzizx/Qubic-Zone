@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::get('/', [MainController::class, 'displayHomePage']);
 Route::get('/services', [MainController::class, 'displayServices']);
+Route::get('/plans', [MainController::class, 'viewPlans']);
+Route::get('/branches', [MainController::class, 'viewAllBranches']);
 
 // Route::get('/dashboard', function () {
 //     //return view('dashboard');
@@ -45,6 +47,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/orderConfirm/{orderId}', [MainController::class, 'orderConfirm']);
     Route::get('/orderCancel/{orderId}', [MainController::class, 'orderCancel']);
+
+    Route::get('/plans/{planId}', [MainController::class, 'PurchasePlan']);
+
 
 });
 

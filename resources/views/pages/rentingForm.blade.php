@@ -276,7 +276,16 @@
                 <option value="3">ثلاثة أشهر</option>
                 <option value="6">ستة أشهر</option>
                 <option value="12">سنة واحدة</option>
+                @php
+        use App\Models\Subscription;
+        $sub = Subscription::where('user_id', auth()->id())->first();
+        @endphp
+                @if ($sub->plan_id == 1)
+                <option disabled value="24"> 💎 سنتين</option>
+                @else
                 <option value="24">سنتين</option>
+                @endif
+                
             </select>
         </div>
         @foreach ($sizes as $size)

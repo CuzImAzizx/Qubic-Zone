@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/orderCancel/{orderId}', [MainController::class, 'orderCancel']);
 
     Route::get('/plans/{planId}', [MainController::class, 'PurchasePlan']);
+    Route::post('/plans/{planId}/process', [MainController::class, 'ActuallyPurchasePlan']);
 
 
 });

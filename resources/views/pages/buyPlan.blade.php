@@ -158,7 +158,7 @@
 
                     <input type="hidden" name="plan_id" value="{{ $plan->id }}">
 
-                    <button type="submit" class="btn btn-lg btn-primary" type="button">
+                    <button type="submit" class="btn btn-lg btn-primary" type="button" style="text-align:center">
                         اتمام الطلب
                     </button>
 

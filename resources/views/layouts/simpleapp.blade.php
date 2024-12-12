@@ -39,7 +39,9 @@
         }
     </style>
 </head>
-
+@php
+use App\Models\Subscription;
+@endphp
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="font-size:x-large">
         <div class="container-fluid">
@@ -64,8 +66,15 @@
                         <a class="nav-link" href="/login">تسجيل الدخول</a>
                     </li>
                     @else
+                    <li>
+                        @php
+                        $loyaltyPoints = Subscription::where('user_id', auth()->id())->first()->loyalty_points
+                        @endphp
+                    <div class="nav-link">نقاط الولاء: {{$loyaltyPoints}}</div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/myProfile">حسابي</a>
+                        
                     </li>
                     @endif
                 </ul>

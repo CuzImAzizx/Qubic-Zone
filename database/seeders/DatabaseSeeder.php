@@ -30,17 +30,35 @@ class DatabaseSeeder extends Seeder
         //Create plans
         $basicPlan = Plan::create([
             'name' => 'الخطة الأساسية',
-            'description' => 'الوصول الى خصائص اساسية',
+            'description' => '
+                <p>الوصول الى خصائص اساسية</p>
+                <p><strong>:الباقة العادية</strong></p>
+                <div class="right-aligned-list">
+                    <ul>
+                        <li>الدعم الفني أوقات الدوام</li>
+                        <li>إمكانية طلب التنظيف ٢/٣ مرة بالأسبوع</li>
+                        <li>استخراج بدل فاقد لبطاقات الدخول مرة واحدة شهريًا</li>
+                    </ul>
+                </div>',
             'image' => 'assets/images/plans/planBasic.png',
             'price_per_month' => 0,
         ]);
         $premiumPlan = Plan::create([
             'name' => 'الخطة الذهبية',
-            'description' => 'الوصول الى خصائص اكثر',
+            'description' => '
+                <p>الوصول الى خصائص أكثر</p>
+                <p><strong>:الباقة المميزة</strong></p>
+                <div class="right-aligned-list">
+                    <ul>
+                        <li>دعم فني على مدار الساعة</li>
+                        <li>إتاحة خدمة التنظيف يوميًا</li>
+                        <li>استخراج بدل فاقد لبطاقات ٣ مرات شهريًا</li>
+                        <li>امكانية حجز المستودع لمدة تصل الى سنتين</li>
+                    </ul>
+                </div>',
             'image' => 'assets/images/plans/planPremium.png',
             'price_per_month' => 200,
         ]);
-
 
         $defaultUser = User::create([
             'name' => "user",
@@ -53,54 +71,55 @@ class DatabaseSeeder extends Seeder
             'plan_id' => $basicPlan->id,
             'start_date' => now(),
             'end_date' => null,
+            'loyalty_points' => 0,
         ]);
 
         //Create cities
-        City::create([
+        $riyadCity = City::create([
             'id' => 1,
             'name' => 'الرياض',
         ]);
-        City::create([
+        $qassimCity = City::create([
             'id' => 2,
             'name' => 'القصيم',
         ]);
-        
+
         //Create branches
         Branch::create([
             'name' => "الفرع شمالي",
             'description' => "شارع انس بن مالك, حي الياسمين, شمال مدينة الرياض",
             'image' => '/assets/images/warehouses/1.png',
-            'city_id' => 1,
+            'city_id' => $riyadCity->id,
         ]);
         Branch::create([
             'name' => "الفرع الجنوبي",
             'description' => "شارع الامام علي ابن ابي طالب, حي الفيصلية, جنوب مدينة الرياض",
             'image' => '/assets/images/warehouses/2.png',
-            'city_id' => 1,
+            'city_id' => $riyadCity->id,
         ]);
         Branch::create([
             'name' => "فرع بريدة",
             'description' => "شارع عمر بن الخطاب, حي الرحاب, شمال مدينة بريدة",
             'image' => '/assets/images/warehouses/3.png',
-            'city_id' => 2,
+            'city_id' => $qassimCity->id,
         ]);
 
         //Create sizes
-        Size::create([
+        $smallSize = Size::create([
             'name' => 'صغير',
             'dimensions' => '5x5"',
             'description' => 'مناسب لـ أغراض صغيرة، وثائق، حقائب صغيرة',
             'image' => '/assets/images/unit-sizes/small.png',
             'price_per_month' => 150,
         ]);
-        Size::create([
+        $mediumSize = Size::create([
             'name' => 'متوسط',
             'dimensions' => '10x15"',
             'description' => 'مناسب لـ: أثاث صغير، دراجات، معدات رياضية',
             'image' => '/assets/images/unit-sizes/medium.png',
             'price_per_month' => 300,
         ]);
-        Size::create([
+        $largeSize = Size::create([
             'name' => 'كبير',
             'dimensions' => '10x30"',
             'description' => 'مناسب لـ: أثاث متوسط الحجم، أجهزة منزلية، أرشيف',
@@ -112,52 +131,43 @@ class DatabaseSeeder extends Seeder
         // Create the units on all the branches
         $branches = Branch::all();
         foreach ($branches as $branch) {
-            
-        // Create 20 small normal units for $branch->id,
-        for ($i=0; $i < 20; $i++) { 
-            Unit::create([
-                'branch_id' => $branch->id,
-                'size_id' => 1,
-                'type' => 'normal',
-                'is_available' => true,
-            ]);
+
+            // Create 20 small normal units for $branch->id
+            for ($i = 0; $i < 20; $i++) {
+                Unit::create([
+                    'branch_id' => $branch->id,
+                    'size_id' => $smallSize->id,
+                    'type' => 'normal',
+                    'is_available' => true,
+                ]);
+            }
+            // Create 10 medium normal units for $branch->id
+            for ($i = 0; $i < 10; $i++) {
+                Unit::create([
+                    'branch_id' => $branch->id,
+                    'size_id' => $mediumSize->id,
+                    'type' => 'normal',
+                    'is_available' => true,
+                ]);
+            }
+            // Create 5 large normal units for $branch->id
+            for ($i = 0; $i < 5; $i++) {
+                Unit::create([
+                    'branch_id' => $branch->id,
+                    'size_id' => $largeSize->id,
+                    'type' => 'normal',
+                    'is_available' => true,
+                ]);
+            }
+            // Create 5 small refrigerated units for $branch->id
+            for ($i = 0; $i < 5; $i++) {
+                Unit::create([
+                    'branch_id' => $branch->id,
+                    'size_id' => 1,
+                    'type' => 'refrigerated',
+                    'is_available' => true,
+                ]);
+            }
         }
-        // Create 10 medium normal units for branch_id 1
-        for ($i=0; $i < 10; $i++) { 
-            Unit::create([
-                'branch_id' => $branch->id,
-                'size_id' => 2,
-                'type' => 'normal',
-                'is_available' => true,
-            ]);
-        }
-        // Create 5 large normal units for branch_id 1
-        for ($i=0; $i < 5; $i++) { 
-            Unit::create([
-                'branch_id' => $branch->id,
-                'size_id' => 3,
-                'type' => 'normal',
-                'is_available' => true,
-            ]);
-        }
-        // Create 5 small refrigerated units for branch_id 1
-        for ($i=0; $i < 5; $i++) { 
-            Unit::create([
-                'branch_id' => $branch->id,
-                'size_id' => 1,
-                'type' => 'refrigerated',
-                'is_available' => true,
-            ]);
-        }
-
-        }
-
-
-        
-
-
-
-
-
     }
 }

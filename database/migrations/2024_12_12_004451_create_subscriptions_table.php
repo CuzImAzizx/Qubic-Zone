@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('plan_id')->constrained('plans');
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
+            $table->bigInteger('loyalty_points')->default(0);
             $table->timestamps();
         });
     }

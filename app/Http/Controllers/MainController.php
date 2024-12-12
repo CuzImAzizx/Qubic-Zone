@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\City;
 use App\Models\Plan;
 use App\Models\Size;
+use App\Models\Subscription;
 use App\Models\Unit;
 use App\Models\unit_order;
 use Illuminate\Http\Request;
@@ -142,6 +143,9 @@ class MainController extends Controller
             'total_price' => $totalPrice,
             'status' => 'confirmed',
         ]);
+        $userSub = Subscription::where('user_id', $userId)->first();
+        $userSub->loyalty_points += intval($totalPrice * 0.1);
+        $userSub->update();
         return view('pages.confirmation')
         ->with('placedOrder', $placedOrder);
     }
@@ -181,6 +185,9 @@ class MainController extends Controller
             'total_price' => $totalPrice,
             'status' => 'confirmed',
         ]);
+        $userSub = Subscription::where('user_id', $userId)->first();
+        $userSub->loyalty_points += intval($totalPrice * 0.1);
+        $userSub->update();
         return view('pages.confirmation')
         ->with('placedOrder', $placedOrder);
     }
@@ -229,6 +236,16 @@ class MainController extends Controller
         //TODO: Check if user has this plan
         $plan = Plan::findOrFail($planId);
         return view('pages.buyPlan')->with('plan', $plan);
+    }
+    public function ActuallyPurchasePlan($planId){
+        //TODO: make sure he do not have this plan already
+        //TODO: Make sure that there's a plan with $planId;
+        $user = auth()->user();
+
+        $userSub = Subscription::where('user_id', $user->id)->first();
+        $userSub->plan_id = $planId;
+        $userSub->update();
+        return redirect('/plans');
     }
 
 

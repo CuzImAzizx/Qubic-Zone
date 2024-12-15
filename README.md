@@ -1,66 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# IT473 Group Project: Qubic Zone: E-commerce platform for on-demand self-storage solutions
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a project for IT473 e-commerce systems course. Our objective was to build and start a new business within the e-commerce domain. And complete the following tasks:
+- **Business Planning**: Create a comprehensive plan for launching our new business.
+- **Website/App Development**: Develop a functional e-commerce website.
+- **Project Reporting**: Prepare an in-depth report detailing our project.
+- **Presentation**: Present our project and demonstrate the website functionality.
 
-## About Laravel
+Full report about our project idea is in [this pdf](./report.pdf). This repo will discuss the implmentaion of our website.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Status: Completed ✅
+The website is functional and both the report and presentation are ready. We've presented our work and we got full marks for the project.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Features 
+- **User Authentication**: Users can easily register and log in to interact with the platform securely.
+- **User Interface**: A simple and intuitive web interface designed for seamless customer interactions.
+- **View services**: Customers can browse a variety of storage options.
+- **Submit an order**: Users can place orders for storage units with ease.
+- **Track orders**: Customers can track the status of their orders and previous orders.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![alt text](./image1.png)
 
-## Learning Laravel
+# Technologies Used
+- **Frontend**: HTML, CSS, JavaScript.
+- **Backend**: Laravel, PHP, Blade Templates.
+- **Database**: SQLite.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![alt text](./image2.png)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+# Skills Gained
+- **E-Commerce Development**: Understanding of e-commerce platforms and their functionalities.
+- **Web Development**: Enhanced skills in frontend and backend development.
+- **Project Management**: Experience in planning, executing, and presenting a comprehensive project.
+- **Team Collaboration**: Improved teamwork and communication skills through group collaboration.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![alt text](./image3.png)
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Installation
+To set up the Qubic Zone project locally, follow these steps:
+## Prerequisites
+Make sure you have the following installed on your machine:
+- [PHP](https://www.php.net/downloads) (version 7.3 or higher)
+- [Composer](https://getcomposer.org/download/)
+- [Laravel](https://laravel.com/docs/8.x/installation) (install via Composer)
+- [SQLite](https://www.sqlite.org/download.html) (or any other preferred database)
+## Clone the Repository
+```bash
+git clone https://github.com/CuzImAzizx/qubic-zone.git
+cd qubic-zone
+```
+## Install Dependencies
+Run the following command to install the required PHP packages:
+```bash
+composer install
+```
+## Configure Environment
+Copy the example environment file and set up your environment variables:
+```bash
+cp .env.example .env
+```
+## Generate Application Key
+Run the following command to generate the application key:
+```bash
+php artisan key:generate
+```
+## Run Migrations
+Run the migrations to set up the necessary tables:
+```bash
+php artisan migrate # or php artisan migrate:fresh
+```
+## Seed the database
+You need to seed the database with initial data.
+```bash
+php artisan db:seed
+```
+## Start the Development Server
+You can now start the Laravel development server:
+```bash
+php artisan serve
+```
+Visit `http://localhost:8000` in your web browser to view the application.

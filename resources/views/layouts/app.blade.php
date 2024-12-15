@@ -93,6 +93,7 @@
 				            <!-- Collect the nav links, forms, and other content for toggling -->
 				            <div class="collapse navbar-collapse menu-ui-design">
 				                <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/contact">التواصل</a></li>
 								<li><a href="/services">الخدمات</a></li>
 				                    <li><a href="/branches">الفروع</a></li>
 									<li><a href="/plans">الاشتراكات</a></li>

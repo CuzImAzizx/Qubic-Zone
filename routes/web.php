@@ -11,6 +11,11 @@ Route::get('/', [MainController::class, 'displayHomePage']);
 Route::get('/services', [MainController::class, 'displayServices']);
 Route::get('/plans', [MainController::class, 'viewPlans']);
 Route::get('/branches', [MainController::class, 'viewAllBranches']);
+Route::get('/contact', function () {
+    return view('pages.contact');
+});
+
+
 
 // Route::get('/dashboard', function () {
 //     //return view('dashboard');

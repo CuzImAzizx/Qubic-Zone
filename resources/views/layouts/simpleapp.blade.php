@@ -52,6 +52,10 @@ use App\Models\Subscription;
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                <li class="nav-item">
+                        <a class="nav-link" href="/contact">التواصل</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/services">الخدمات</a>
                     </li>
@@ -77,6 +81,7 @@ use App\Models\Subscription;
                         
                     </li>
                     @endif
+
                 </ul>
             </div>
         </div>

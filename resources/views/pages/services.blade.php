@@ -102,7 +102,19 @@
                     <a href="/contact" class="btn btn-primary">تواصل معنا</a>
                 </div>
             </div>
+        </div>  
+        <div class="col">
+            <div class="card storage-card">
+                <img class="card-img-top" src="{{ asset('/assets/images/warehouses/a.png') }}"
+                    alt="">
+                <div class="card-body">
+                    <h5 class="card-title">اعلن معنا</h5>
+                    <p class="card-text">هل ترغب في تعزيز ظهورك وزيادة مبيعاتك؟ نحن هنا للمساعدة! انضم إلينا اليوم وابدأ الإعلان معنا</p>
+                    <a href="/contact" class="btn btn-primary">تواصل معنا</a>
+                </div>
+            </div>
         </div>        
+      
     </div>
 </div>
 

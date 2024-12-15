@@ -3,7 +3,7 @@
 <div class="container text-center content">
                     <div class="row">
                         <h2>اختر موقع المستودع</h2>
-                        <p>نتوفر في كافة مناطق المملكة بخدمات تخزين متواجدة وكلام فاضي هنا</p>
+                        <p>نتوفر في كافة مناطق المملكة بخدمات تخزين متواجدة في انحاء العالم</p>
                         <div class="col">
                             <img style="width:500px;"
                                 src="https://alwedad.sa/sites/default/files/users/2/map_image.png">

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Subscription;
 
 class RegisteredUserController extends Controller
 {
@@ -40,6 +41,15 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        Subscription::create([
+            'user_id' => $user->id,
+            'plan_id' => 1,
+            'start_date' => now(),
+            'end_date' => null,
+            'loyalty_points' => 0,
+        ]);
+
 
         event(new Registered($user));
 

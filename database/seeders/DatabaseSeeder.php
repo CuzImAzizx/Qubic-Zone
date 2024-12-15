@@ -51,9 +51,9 @@ class DatabaseSeeder extends Seeder
                 <div class="right-aligned-list">
                     <ul>
                         <li>دعم فني على مدار الساعة</li>
+                        <li>امكانية حجز المستودع لمدة تصل الى سنتين</li>
                         <li>إتاحة خدمة التنظيف يوميًا</li>
                         <li>استخراج بدل فاقد لبطاقات ٣ مرات شهريًا</li>
-                        <li>امكانية حجز المستودع لمدة تصل الى سنتين</li>
                     </ul>
                 </div>',
             'image' => 'assets/images/plans/planPremium.png',
@@ -76,12 +76,13 @@ class DatabaseSeeder extends Seeder
 
         //Create cities
         $riyadCity = City::create([
-            'id' => 1,
             'name' => 'الرياض',
         ]);
         $qassimCity = City::create([
-            'id' => 2,
             'name' => 'القصيم',
+        ]);
+        $colifornia = City::create([
+            'name' => 'كلفورنيا',
         ]);
 
         //Create branches
@@ -102,6 +103,12 @@ class DatabaseSeeder extends Seeder
             'description' => "شارع عمر بن الخطاب, حي الرحاب, شمال مدينة بريدة",
             'image' => '/assets/images/warehouses/3.png',
             'city_id' => $qassimCity->id,
+        ]);
+        Branch::create([
+            'name' => "فرع لوس انجلوس",
+            'description' => "شارع غارفيلد آيف, غرب وادي سان غابرييل, لوس انجلوس, جنوب كلفورنيا",
+            'image' => '/assets/images/warehouses/5.png',
+            'city_id' => $colifornia->id,
         ]);
 
         //Create sizes
@@ -126,7 +133,6 @@ class DatabaseSeeder extends Seeder
             'image' => '/assets/images/unit-sizes/large.png',
             'price_per_month' => 450,
         ]);
-
 
         // Create the units on all the branches
         $branches = Branch::all();

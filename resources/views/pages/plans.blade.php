@@ -77,34 +77,38 @@
 }
     </style>
     <div class="row row-cols-1 row-cols-md-2 g-4">
-        @foreach ($plans as $plan)
-        <div class="col">
-            <div class="card storage-card">
-                <img class="card-img-top" src="{{ asset($plan->image) }}" alt="{{ $plan->name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{$plan->name}}</h5>
-                    <p class="card-text">{!! $plan->description !!}</p>
-                    @if ($plan->price_per_month == 0)
-                        <p class="card-text">مجانًا مع كل حساب</p>
-                    @else
-                        <p class="card-text">سعر الاشتراك الشهري: {{$plan->price_per_month}} ر.س</p>
-                    @endif
-                    @if (auth()->check())
-                        @php
+    @foreach ($plans as $plan)
+    <div class="col">
+        <div class="card storage-card">
+            <img class="card-img-top" src="{{ asset($plan->image) }}" alt="{{ $plan->name }}" loading="lazy">
+            <div class="card-body">
+                <h5 class="card-title">{{ $plan->name }}</h5>
+                <p class="card-text">{!! $plan->description !!}</p>
+                
+                @if ($plan->price_per_month == 0)
+                    <p class="card-text"><strong>مجانًا مع كل حساب</strong></p>
+                @else
+                    <p class="card-text">سعر الاشتراك الشهري: <strong>{{ number_format($plan->price_per_month) }} ر.س</strong></p>
+                @endif
+
+                @if (auth()->check())
+                    @php
                         $userSub = Subscription::where('user_id', auth()->id())->first();
-                        @endphp
-                        @if ($userSub->plan_id == $plan->id)
-                            <strong><span class="text-success"><h5>مشترك</h5></span></strong>
-                        @elseif($plan->price_per_month != 0)
-                            <a href="/plans/{{$plan->id}}" class="btn btn-primary">اشترك الآن</a>
-                        @endif
+                    @endphp
+                    
+                    @if ($userSub && $userSub->plan_id == $plan->id)
+                        <strong><span class="text-success"><h5>مشترك</h5></span></strong>
                     @elseif($plan->price_per_month != 0)
-                        <a href="/plans/{{$plan->id}}" class="btn btn-primary">اشترك الآن</a>
-                    @endif                    
-                </div>
+                        <a href="/plans/{{ $plan->id }}" class="btn btn-primary">اشترك الآن</a>
+                    @endif
+                    
+                @elseif($plan->price_per_month != 0)
+                    <a href="/plans/{{ $plan->id }}" class="btn btn-primary">اشترك الآن</a>
+                @endif                    
             </div>
         </div>
-        @endforeach
     </div>
+@endforeach
+</div>
 </div>
 @endsection

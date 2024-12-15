@@ -56,6 +56,19 @@
         background-color: #0056b3;
     }
 </style>
+<style>
+        .right-aligned-list {
+    direction: rtl; /* Set text direction to right-to-left */
+    text-align: right; /* Align text to the right */
+}
+
+.right-aligned-list ul {
+    list-style-position: inside; /* Optional: change bullet position */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+    </style>
+
 
 <div class="container">
     <div class="plan-details-container" style="text-align: right;">
@@ -63,7 +76,7 @@
             <h2 class="plan-title">{{ $plan->name }}</h2>
             <img src="{{ asset($plan->image) }}" alt="{{ $plan->name }}" class="plan-image">
         </div>
-        <p class="plan-description">{{ $plan->description }}</p>
+        <p class="plan-description">{!! $plan->description !!}</p>
         <p class="plan-description">
     بداية الإشتراك: {{ now()->format('Y-m-d') }}
 </p>

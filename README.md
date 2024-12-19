@@ -1,5 +1,5 @@
 # IT473 Group Project: Qubic Zone: E-commerce platform for on-demand self-storage solutions
-
+![alt text](./image4.png)
 This is a project for IT473 e-commerce systems course. Our objective was to build and start a new business within the e-commerce domain. And complete the following tasks:
 - **Business Planning**: Create a comprehensive plan for launching our new business.
 - **Website/App Development**: Develop a functional e-commerce website.
